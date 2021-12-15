@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DisplayedBPM = () => {
+const DisplayedBPM = ({clicks}) => {
   return (
     <div>
-      
+      BPM = {clicks}
     </div>
   )
 }

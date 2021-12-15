@@ -1,10 +1,19 @@
+import { Button } from '@mui/material'
 import React from 'react'
 
-const BpmButton = () => {
+
+
+const BpmButton = ({incrementClicks}) => {
+  const handleClick = () => {
+    incrementClicks()
+  }
   return (
-    <div>
-      
-    </div>
+   
+  <Button className="bpm-button" onClick={handleClick}>
+    Click Here
+  </Button>
+  
+    
   )
 }
 
