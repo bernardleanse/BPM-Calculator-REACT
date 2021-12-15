@@ -3,9 +3,11 @@ import React from 'react'
 
 
 
-const BpmButton = ({incrementClicks}) => {
+const BpmButton = ({incrementClicks, startTimer, updateBpmState}) => {
   const handleClick = () => {
+    startTimer()
     incrementClicks()
+    updateBpmState()
   }
   return (
    

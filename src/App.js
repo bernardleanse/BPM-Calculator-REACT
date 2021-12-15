@@ -11,6 +11,7 @@ function App() {
 
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false)
+  const [bpm, setBpm] = useState(0)
 
   const startTimer = () => {
     if (!isActive){
@@ -25,14 +26,18 @@ function App() {
     setClicks(clicks + 1)
   }
 
+  const updateBpmState = () => {
+    const minutes = seconds / 60
+    const currentBpm = Math.floor(clicks / minutes)
+    setBpm(currentBpm) 
+  }
+
   return (
     <div className="App">
      <Navbar />
      <div className="button-container">
-      <h1>{seconds}</h1>
-      <button onClick={startTimer}>start</button>
-      <DisplayedBPM clicks={clicks} />
-      <BpmButton className="main-button" incrementClicks={incrementClicks} />
+      <DisplayedBPM bpm={bpm} />
+      <BpmButton className="main-button" updateBpmState={updateBpmState} incrementClicks={incrementClicks} startTimer={startTimer}/>
      </div>
     </div>
   );
