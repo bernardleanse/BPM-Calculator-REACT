@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import BpmButton from './components/BpmButton';
 import DisplayedBPM from './components/DisplayedBPM';
 import { useState } from 'react';
+import { ThemeProvider } from '@mui/material';
+import ResetButton from './components/ResetButton';
 
 function App() {
   
@@ -12,14 +14,28 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false)
   const [bpm, setBpm] = useState(0)
+  const [timer, setTimer] = useState(null)
 
   const startTimer = () => {
     if (!isActive){
       setIsActive(true)
-      setInterval(() => {
+      const interval = setInterval(() => {
         setSeconds(seconds => seconds + 1)
        }, 1000)
+      setTimer(interval)
     }
+  }
+
+  const reset = () => {
+    stopTimer()
+    setIsActive(false)
+    setSeconds(0)
+    setClicks(0)
+    setBpm(0)
+  }
+
+  const stopTimer = () => {
+    clearInterval(timer)
   }
 
   const incrementClicks = () => {
@@ -38,6 +54,7 @@ function App() {
      <div className="button-container">
       <DisplayedBPM bpm={bpm} />
       <BpmButton className="main-button" updateBpmState={updateBpmState} incrementClicks={incrementClicks} startTimer={startTimer}/>
+      <ResetButton reset={reset} />
      </div>
     </div>
   );
